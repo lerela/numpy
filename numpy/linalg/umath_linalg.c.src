@@ -68,6 +68,8 @@ dbg_stack_trace()
 # define FNAME(x) x##_
 #endif
 
+# define FNAME_APPLE(x) cblas_##x
+
 typedef struct { float r, i; } f2c_complex;
 typedef struct { double r, i; } f2c_doublecomplex;
 /* typedef long int (*L_fp)(); */
@@ -284,21 +286,25 @@ FNAME(zpotri)(char *uplo, int *n,
               int *info);
 
 extern int
-FNAME(scopy)(int *n,
+FNAME_APPLE(scopy)(int *n,
              float *sx, int *incx,
              float *sy, int *incy);
+#define scopy_ FNAME_APPLE(scopy)
 extern int
-FNAME(dcopy)(int *n,
+FNAME_APPLE(dcopy)(int *n,
              double *sx, int *incx,
              double *sy, int *incy);
+#define dcopy_ FNAME_APPLE(dcopy)
 extern int
-FNAME(ccopy)(int *n,
+FNAME_APPLE(ccopy)(int *n,
              f2c_complex *sx, int *incx,
              f2c_complex *sy, int *incy);
+#define ccopy_ FNAME_APPLE(ccopy)
 extern int
-FNAME(zcopy)(int *n,
+FNAME_APPLE(zcopy)(int *n,
              f2c_doublecomplex *sx, int *incx,
-             f2c_doublecomplex *sy, int *incy);
+             f2c_doublecomplex *sy, int *incy); 
+#define zcopy_ FNAME_APPLE(zcopy)
 
 extern float
 FNAME(sdot)(int *n,

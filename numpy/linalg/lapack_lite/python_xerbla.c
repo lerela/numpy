@@ -20,7 +20,7 @@
   info: Number of the invalid parameter.
 */
 
-int xerbla_(char *srname, integer *info)
+int custom_xerbla_(char *srname, integer *info)
 {
         static const char format[] = "On entry to %.*s" \
                 " parameter number %d had an illegal value";

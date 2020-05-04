@@ -45,7 +45,7 @@ extern int FNAME(zungqr)(int *m, int *n, int *k, f2c_doublecomplex a[],
                           int *lda, f2c_doublecomplex tau[],
                           f2c_doublecomplex work[], int *lwork, int *info);
 
-extern int FNAME(xerbla)(char *srname, int *info);
+extern int FNAME(custom_xerbla)(char *srname, int *info);
 
 static PyObject *LapackError;
 
@@ -291,7 +291,7 @@ lapack_lite_xerbla(PyObject *NPY_UNUSED(self), PyObject *args)
 
     NPY_BEGIN_THREADS_DEF;
     NPY_BEGIN_THREADS;
-    FNAME(xerbla)("test", &info);
+    FNAME(custom_xerbla)("test", &info);
     NPY_END_THREADS;
 
     if (PyErr_Occurred()) {
