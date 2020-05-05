@@ -757,7 +757,9 @@ def configuration(parent_package='',top_path=None):
             join('src', 'common', 'numpyos.c'),
             ]
 
-    blas_info = get_info('blas_opt', 0)
+    # XXX IOS, no blas available
+    # blas_info = get_info('blas_opt', 0)
+    blas_info = None
     if blas_info and ('HAVE_CBLAS', None) in blas_info.get('define_macros', []):
         extra_info = blas_info
         # These files are also in MANIFEST.in so that they are always in
@@ -822,7 +824,10 @@ def configuration(parent_package='',top_path=None):
             join('include', 'numpy', 'npy_1_7_deprecated_api.h'),
             # add library sources as distuils does not consider libraries
             # dependencies
-            ] + npysort_sources + npymath_sources
+
+            # XXX This breaks for iOS, it results on duplicate symbols
+            # ] + npysort_sources + npymath_sources
+            ] #+ npysort_sources + npymath_sources
 
     multiarray_src = [
             join('src', 'multiarray', 'alloc.c'),
@@ -921,7 +926,7 @@ def configuration(parent_package='',top_path=None):
 
     config.add_extension('_multiarray_umath',
                          sources=multiarray_src + umath_src +
-                                 npymath_sources + common_src +
+                                 common_src +
                                  [generate_config_h,
                                   generate_numpyconfig_h,
                                   generate_numpy_api,
